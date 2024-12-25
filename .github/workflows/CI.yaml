@@ -1,6 +1,4 @@
 name: Node.js CI
-
-# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
@@ -9,22 +7,26 @@ on:
     branches:
       - main
 
-    env:
-      API_KEY: ${{ secrets.MY_SECRETS }}   # Access the API_KEY from GitHub secrets
-      NODE_VERSION: 18      
-
-# Define the jobs that run in the workflow
 jobs:
   build:
-    runs-on: ubuntu-latest  # This defines the OS where the workflow runs
+    runs-on: ubuntu-latest 
+
+    env:
+      NODE_VERSION: 18 
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # This checks out your code from the repository
+      uses: actions/checkout@v3 
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3  # This sets up Node.js on the runner
+      uses: actions/setup-node@v3 
       with:
-        node-version: ${{env.NODE_VERSION}}
-        GH_TOKEN: ${{secrets.API_KEY}} # Specify the Node.js version you want to use
+        node-version: ${{ env.NODE_VERSION }} 
+        GH_TOKEN: ${{ secrets.API_KEY }}
 
+    - name: Run your tests or other commands
+      env:
+        API_KEY: ${{ secrets.MY_SECRETS }}
+      run: |
+        echo "Using API_KEY: $API_KEY"
+        # Run any other commands here that require the API_KEY
