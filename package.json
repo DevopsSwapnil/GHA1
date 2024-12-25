@@ -1,0 +1,25 @@
+{
+    "name": "your-project-name",
+    "version": "1.0.0",
+    "description": "Your project description",
+    "main": "index.js",
+    "scripts": {
+      "install": "npm install",
+      "test": "npm test",
+      "coverage": "npm run test && codecov"
+    },
+    "dependencies": {
+      "some-dependency": "^1.0.0"
+    },
+    "devDependencies": {
+      "jest": "^29.0.0",
+      "codecov": "^3.0.0"
+    },
+    "jest": {
+      "coverageDirectory": "./coverage",
+      "collectCoverage": true
+    },
+    "author": "Your Name",
+    "license": "MIT"
+  }
+  
