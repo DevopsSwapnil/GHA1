@@ -1,0 +1,34 @@
+name: Node.js CI
+
+# Trigger the workflow on push or pull request to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Define the jobs that run in the workflow
+jobs:
+  build:
+    runs-on: ubuntu-latest  # This defines the OS where the workflow runs
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # This checks out your code from the repository
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3  # This sets up Node.js on the runner
+      with:
+        node-version: '16'  # Specify the Node.js version you want to use
+
+    - name: Install dependencies
+      run: npm install  # Installs dependencies defined in package.json
+
+    - name: Run tests
+      run: npm test  # Runs tests defined in your package.json
+
+    - name: Upload coverage results
+      if: success()  # Only upload if tests pass
+      uses: codecov/codecov-action@v3  # This uploads the test coverage to Codecov
