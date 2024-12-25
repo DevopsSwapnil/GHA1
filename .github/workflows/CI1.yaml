@@ -6,13 +6,12 @@ on:
   pull_request:
     branches:
       - main
+env:
+  NODE_VERSION: 18
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
-
-    env:
-      NODE_VERSION: 18 
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -22,7 +21,7 @@ jobs:
       uses: actions/setup-node@v3 
       with:
         node-version: ${{ env.NODE_VERSION }} 
-        GH_TOKEN: ${{ secrets.API_KEY }}
+        GH_TOKEN: ${{ secrets.MY_SECRETS }}
 
     - name: Run your tests or other commands
       env:
